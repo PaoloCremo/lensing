@@ -1,4 +1,4 @@
-(*```Mathematica*)
+```Mathematica
 
 #!/usr/bin/env wolframscript
 (* ::Package:: *)
