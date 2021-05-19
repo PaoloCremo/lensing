@@ -38,10 +38,10 @@ DLS=c/H0*Da[zL,zS]; (* m *)
 (*lens parameter*)
 
 
-ML = 10^9*smtokg; (*mass lens rest (lens) frame*)
+ML = 5*10^8*smtokg; (*mass lens rest (lens) frame*)
 
 \[Rho]s = 4.938784307737533*10^-22;
-rs = 1.517823*10^20; (*M=10^9*)
+rs = 1.271299163497*10^20; (*M=10^9*)
 (*rs = 1.2712991634979609*10^20; (*M=5*10^8 - CHANGE ALSO ML*) *)
 
 \[Theta]E = Sqrt[4*G*ML/c^2*DLS/(DS*DL)];
@@ -96,7 +96,7 @@ Length[amps]
 
 \[Lambda]str = StringReplace[ToString[\[Lambda]], "."->""];
 (*Export["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05_L"<>\[Lambda]str<>"_new", amps, "Binary", "DataFormat"->"Complex64"];*)
-Export["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05", amps, "Binary", "DataFormat"->"Complex64"];
+Export["amps_case_h_H74_y"<>ystr<>"_M5_10-8_zL05", amps, "Binary", "DataFormat"->"Complex64"];
 
 
 (* ::Code::Initialization::Bold:: *)

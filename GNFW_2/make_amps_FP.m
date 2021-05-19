@@ -54,41 +54,53 @@ M2D[rs_]:=\[Pi]*Re[\[Theta]E*DL/rs*rs^2*\[Alpha][\[Theta]E*DL/rs, \[Rho]s, rs]];
 
 
 \[Lambda] = 1.;
-y = 5.;
+y = 0.06340;
 Print["\[Lambda] = "<>ToString[\[Lambda]]]
 Print["y = "<>ToString[y]]
 ystr = StringReplace[ToString[y], "."->""];
-Print["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05"]
+Print["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05_FP"]
+
+
+h[x_]:=Log[x]+1/2 (\[Pi] x-Log[4]+I Sqrt[-1+x^2] (Log[I-Sqrt[-1+x^2]]-Log[I+Sqrt[-1+x^2]]));
+le = y-x+(16*\[Pi]*G/c^2*\[Rho]s*rs*DLS*DL/DS*h[x]/x); (*lens equation*)
+xm1 = NSolve[le==0 && 0<x<1, x];
+xm2 = NSolve[le==0 && 1<x<10^2, x];
+If[Length[xm1]==1, xm=Values[xm1][[1,1]],xm=Values[xm2][[1,1]]];
+(*xm*)
 
 
 (*GNFW 2 *)
 g[R_]:=1/8 (-\[Pi]^2+4 \[Pi] R+4 (-2+Log[2]) Log[2]-4 Log[I-Sqrt[-1+R^2]]^2+Log[R] (8-4 Log[4]+8 Log[I-Sqrt[-1+R^2]])-4 I ArcTan[Sqrt[-1+R^2]] (2 Log[R]-Log[I-Sqrt[-1+R^2]]-Log[I+Sqrt[-1+R^2]])+4 I Sqrt[-1+R^2] (Log[I-Sqrt[-1+R^2]]-Log[I+Sqrt[-1+R^2]]));
 \[Psi]hat1[x_]:=16*\[Pi]*G/c^2*\[Rho]s*rs*DLS*DL/DS*g[x];
 \[Psi]hatx[x_]:=Re[\[Psi]hat1[x]]; (* Imaginary term is much smaller *)
+\[Phi]m = -(1/2*(xm-y)^2-\[Psi]hatx[xm]);
 
 amp2[f_]:=Parallelize[(
 (*w=DS*DL/(c*DLS)*\[Theta]E^2*(1+zL)*2\[Pi]*f;*)
 w=(1+zL)/c*DS*rs^2/(DL*DLS)*2\[Pi]*f;
--I*w*Exp[I*w*\[Lambda]^2*y^2/2]*NIntegrate[x*BesselJ[0.,w*\[Lambda]*y*x]*Exp[I*w*\[Lambda]*(x^2/2-\[Psi]hatx[x])],{x,10^-9,Infinity},Method->{"LevinRule"},WorkingPrecision->10]
+-I*w*Exp[I*w*\[Lambda]^2*y^2/2]*NIntegrate[x*BesselJ[0.,w*\[Lambda]*y*x]*Exp[I*w*\[Lambda]*(x^2/2-\[Psi]hatx[x]+\[Phi]m)],{x,10^-9,Infinity},Method->{"LevinRule"},WorkingPrecision->10]
 )];
+
+
+(*
+ff = Range[10^-5, 2*10^-4, 1.5*10^-6];
+Length[ff]
+(*ww=(1+zL)/c*DS*rs^2/(DL*DLS)*2\[Pi]*ff;*)
+af = amp2[ff];
+(*Re[-I*Log[af/Abs[af]]];
+LogLinearPlot[Re[-I*Log[af/Abs[af]]]]*)
+ListLogLinearPlot[Transpose@{ff, Re[-I*Log[af/Abs[af]]]}, Joined\[Rule]True, PlotRange\[Rule]All]
+*)
 
 
 (* ::Section:: *)
 (*calcolo AF*)
 
 
-dt = 1;
-n = 3157032; (*complete waveform*)
-(*prefs=Range[(n-1)/2]/(dt*n);*) (*n dispari*)
-prefs=Range[n/2]/(dt*n); (*n pari*)
-df = 1/(dt*n)//N;
-indfin = IntegerPart[4*10^-4/df];
-prefs = Take[prefs, {1, indfin}];
-(*
-len = 220201;
-ind=1; 
-fs=Table[prefs[[i]],{i,(ind-1)*len+1,ind*len}];
-*)
+n = 513; (*complete waveform in f domain*)
+df = 10^-6;
+prefs=Range[0, df*(n-1), df]; 
+
 Length[prefs]
 amps =amp2[prefs]; (*Exp[-I*Arg[amp2[10.]]]*)
 Length[amps]
@@ -96,7 +108,7 @@ Length[amps]
 
 \[Lambda]str = StringReplace[ToString[\[Lambda]], "."->""];
 (*Export["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05_L"<>\[Lambda]str<>"_new", amps, "Binary", "DataFormat"->"Complex64"];*)
-Export["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05", amps, "Binary", "DataFormat"->"Complex64"];
+Export["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05_FP", amps, "Binary", "DataFormat"->"Complex64"];
 
 
 (* ::Code::Initialization::Bold:: *)
@@ -107,12 +119,8 @@ Date[]
 (*prove*)
 
 
-(*dt = 1;
-n = 3157032; (*complete waveform*)
-prefs=Range[n/2]/(dt*n);
-df = 1/(dt*n)//N
-indfin = IntegerPart[4*10^-4/df];
-prefs = Take[prefs, {1, indfin}];
-Print["Number of points : "<>ToString[Length[prefs]]]
-Length[prefs]/4//N
-Print["Final frequency : "<>ToString[prefs[[-1]]//N]]*)
+(*
+n = 513; (*complete waveform in f domain*)
+df = 10^-6;
+prefs=Range[0, df*(n-1), df]; 
+*)
