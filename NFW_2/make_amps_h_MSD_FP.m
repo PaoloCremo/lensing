@@ -30,8 +30,8 @@ w1=0.;
 
 Da[zin_,zout_]:=1/(1+zout)*NIntegrate[1/Sqrt[om*(1+z)^3+(1-om)*(1+z)^(-3(1+w0+w1))*Exp[-3*w1*(z/(1+z))]],{z,zin,zout}];
 
-zL=0.5;
-zS=1.;
+zL=0.25;
+zS=0.5;
 
 DL=c/H0*Da[0.,zL]; (* m *)
 DS=c/H0*Da[0.,zS]; (* m *)
@@ -65,7 +65,7 @@ y = 0.02804;
 Print["\[Lambda] = "<>ToString[\[Lambda]]]
 Print["y = "<>ToString[y]]
 ystr = StringReplace[ToString[y], "."->""];
-Print["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05"]
+Print["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05_FP"]
 
 
 le = y-x+(16*\[Pi]*G/c^2*\[Rho]s*rs*DLS*DL/DS*h[x]/x); (*lens equation*)
@@ -94,18 +94,21 @@ w=(1+zL)/c*DS*rs^2/(DL*DLS)*2\[Pi]*f;
 )];
 
 
-dt = 1;
-n = 3157032; (*complete waveform*)
-(*prefs=Range[(n-1)/2]/(dt*n);*) (*n dispari*)
-prefs=Range[n/2]/(dt*n); (*n pari*)
-df = 1/(dt*n)//N;
-indfin = IntegerPart[4*10^-4/df];
-prefs = Take[prefs, {1, indfin}];
 (*
-len = 220201;
-ind=1; 
-fs=Table[prefs[[i]],{i,(ind-1)*len+1,ind*len}];
+ff = Range[10^-5, 2*10^-4, 2*10^-6];
+Length[ff]
+(*ww=(1+zL)/c*DS*rs^2/(DL*DLS)*2\[Pi]*ff;*)
+af = amp2[ff];
+(*Re[-I*Log[af/Abs[af]]];
+LogLinearPlot[Re[-I*Log[af/Abs[af]]]]*)
+ListLogLinearPlot[Transpose@{ff, Re[-I*Log[af/Abs[af]]]}, Joined\[Rule]True, PlotRange\[Rule]All]
 *)
+
+
+n = 513; (*complete waveform in f domain*)
+df = 10^-6;
+prefs=Range[0, df*(n-1), df]; 
+
 Length[prefs]
 amps =amp2[prefs]; (*Exp[-I*Arg[amp2[10.]]]*)
 Length[amps]
@@ -113,7 +116,7 @@ Length[amps]
 
 \[Lambda]str = StringReplace[ToString[\[Lambda]], "."->""];
 (*Export["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05_L"<>\[Lambda]str<>"_new", amps, "Binary", "DataFormat"->"Complex64"];*)
-Export["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05_norm", amps, "Binary", "DataFormat"->"Complex64"];
+Export["amps_case_h_H74_y"<>ystr<>"_M10-9_zS05_zL025_FP", amps, "Binary", "DataFormat"->"Complex64"];
 
 
 (* ::Code::Initialization::Bold:: *)
@@ -124,12 +127,8 @@ Date[]
 (*prove*)
 
 
-(*dt = 1;
-n = 3157032; (*complete waveform*)
-prefs=Range[n/2]/(dt*n);
-df = 1/(dt*n)//N
-indfin = IntegerPart[4*10^-4/df];
-prefs = Take[prefs, {1, indfin}];
-Print["Number of points : "<>ToString[Length[prefs]]]
-Length[prefs]/4//N
-Print["Final frequency : "<>ToString[prefs[[-1]]//N]]*)
+(*
+n = 513; (*complete waveform in f domain*)
+df = 10^-6;
+prefs=Range[0, df*(n-1), df]; 
+*)
