@@ -43,11 +43,11 @@ DLS=c/H0*Da[zL,zS]; (* m *)
 
 
 \[Lambda] = 1.;
-y = 100.;
+y = 1.;
 Print["\[Lambda] = "<>ToString[\[Lambda]]]
 Print["y = "<>ToString[y]]
 ystr = StringReplace[ToString[y], "."->""];
-Print["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05_FP"]
+Print["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05"]
 
 
 (*M= 10^2*smtokg/(1+zL);*)
@@ -56,8 +56,7 @@ M= 10^9*smtokg; (*mass lens rest (lens) frame*)
 (*SIS*)
 \[Sigma]=((M*c^2*G)/(4*Pi^2)*(DS/(DL*DLS)))^(1/4);
 \[Theta]E = 4*Pi*(\[Sigma]/c)^2*DLS/DS;
-\[Phi]m = y+1/2;
-\[Psi]hatx[x_]:=x; 
+\[Psi]hatx[x_]:=x-y-1/2; 
 (*
 (*point mass*)
 \[Theta]E = Sqrt[4*G*M/c^2*DLS/(DS*DL)];
@@ -72,7 +71,7 @@ Exp[(Pi*w/4)+(I*w/2*Log[w/2])]*Gamma[1-(I*w/2)]*Hypergeometric1F1[I*w/2,1,(I*w*y
 
 amp2[f_]:=Parallelize[(
 w=DS*DL/(c*DLS)*\[Theta]E^2*(1+zL)*2\[Pi]*f;
--I*w*Exp[I*w*\[Lambda]^2*y^2/2]*NIntegrate[x*BesselJ[0.,w*\[Lambda]*y*x]*Exp[I*w*\[Lambda]*(x^2/2-\[Psi]hatx[x]+\[Phi]m)],{x,0,Infinity},Method->{"LevinRule"},WorkingPrecision->10]
+-I*w*Exp[I*w*\[Lambda]^2*y^2/2]*NIntegrate[x*BesselJ[0.,w*\[Lambda]*y*x]*Exp[I*w*\[Lambda]*(x^2/2-\[Psi]hatx[x])],{x,0,Infinity},Method->{"LevinRule"},WorkingPrecision->10]
 )];
 
 fhx[x_]:=Abs[x];
@@ -87,10 +86,18 @@ a = amp2[xx];
 b = amp3[xx];*)
 
 
-n = 513; (*complete waveform in f domain*)
-df = 10^-6;
-prefs=Range[0, df*(n-1), df]; 
-
+dt = 1;
+n = 3157032; (*complete waveform*)
+(*prefs=Range[(n-1)/2]/(dt*n);*) (*n dispari*)
+prefs=Range[n/2]/(dt*n); (*n pari*)
+df = 1/(dt*n)//N;
+indfin = IntegerPart[4*10^-4/df];
+prefs = Take[prefs, {1, indfin}];
+(*
+len = 220201;
+ind=1; 
+fs=Table[prefs[[i]],{i,(ind-1)*len+1,ind*len}];
+*)
 Length[prefs]
 amps =amp2[prefs]; (*Exp[-I*Arg[amp2[10.]]]*)
 Length[amps]
@@ -98,7 +105,7 @@ Length[amps]
 
 \[Lambda]str = StringReplace[ToString[NumberForm[\[Lambda],{2,1}]], "."->""];
 (*Export["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05_L"<>\[Lambda]str<>"_new", amps, "Binary", "DataFormat"->"Complex64"];*)
-Export["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05_FP", amps, "Binary", "DataFormat"->"Complex64"];
+Export["amps_case_h_H74_y"<>ystr<>"_M10-9_zL05_norm", amps, "Binary", "DataFormat"->"Complex64"];
 
 
 (* ::Code::Initialization::Bold:: *)
@@ -109,10 +116,12 @@ Date[]
 (*prove*)
 
 
-(*
-n = 513; (*complete waveform*)
-df = 10^-6;
-prefs=Range[0, df*(n-1), df]; 
-
+(*dt = 1;
+n = 2157032; (*complete waveform*)
+prefs=Range[n/2]/(dt*n);
+df = 1/(dt*n)//N
+indfin = IntegerPart[10^-3/df];
+prefs = Take[prefs, {1, indfin}];
 Length[prefs]
-*)
+Length[prefs]/4//N
+prefs[[-1]]//N*)
