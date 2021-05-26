@@ -11,17 +11,16 @@ amps files: ..._FP    means for phase  and with the normalization factor phi_m
             ...       means long array and         ''
 
 
-m1 = m2 = 5*10**7
+m1 = m2 = 5*10^7
 zS = 1
 dt = 1
 N = 2157032
 N_mt = 3157032
 
-models parameters
+### models parameters
 
-##############
-# M_L = 10^9 # (rest frame)
-##############
+#### M_L = 10^9 (rest frame)
+
 zL = 0.5
 theta_E_SIS = 2.62394 * 10^-7
 		
@@ -70,9 +69,9 @@ yGN0 - 0.05740
 yGN2 - 0.12680
 yBUR - 0.05604
 
-################
-# M_L = 5*10^8 # (rest frame)
-################
+
+#### M_L = 5*10^8 (rest frame)
+
 zL = 0.5
 theta_E_SIS = 1.86 * 10^-7
 		
