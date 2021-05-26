@@ -5,10 +5,11 @@ Packages containing basic functions to calculate waveforms and lensing
 
 # lens models
 
-amps files: - ..._FP    means for phase  and with the normalization factor phi_m </br>
-            - ..._norm  means long array and with the normalization factor phi_m </br>
-            - ..._FP_nn means for phase  and WITHOUT normalization </br>
-            - ...       means long array and WITHOUT normalization </br>
+**amps files** 
+..._FP    means for phase  and with the normalization factor phi_m </br>
+..._norm  means long array and with the normalization factor phi_m </br>
+..._FP_nn means for phase  and WITHOUT normalization </br>
+...       means long array and WITHOUT normalization </br>
 
 
 m1 = m2 = 5*10^7</br> 
