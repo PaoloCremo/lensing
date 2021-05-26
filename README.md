@@ -5,7 +5,7 @@ Packages containing basic functions to calculate waveforms and lensing
 
 # lens models
 
-**amps files** 
+**amps files** </br>
 ..._FP    means for phase  and with the normalization factor phi_m </br>
 ..._norm  means long array and with the normalization factor phi_m </br>
 ..._FP_nn means for phase  and WITHOUT normalization </br>
