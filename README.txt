@@ -1,3 +1,10 @@
+# files
+
+### packages.py
+Packages containing basic functions to calculate waveforms and lensing
+
+# lens models
+
 amps files: ..._FP    means for phase  and with the normalization factor phi_m
             ..._norm  means long array and                ''
             ..._FP_nn means for phase  and WITHOUT normalization
