@@ -1,13 +1,22 @@
 # files
 
-### folder with models name
+### folder with models name (SIS, NFW, NFW_2 & GNFW_2)
 Contain Mathematica script to calculate amplification factor
 
 ### packages
 - `pyCBC_function.py` basic functions to calculate waveforms and lensing
 - `LISA.py` LISA sensitivities from [here](https://github.com/eXtremeGravityInstitute/LISA_Sensitivity/tree/1)
 
-# lens models
+### lens_models
+- `SIS_NFW.py`
+- `SNR.py` calculate SNR
+- `lens_models.py` 
+- `lens_profiles.py` compute and plot lens mass profiles
+- `param_lens_model.py` contain data about lens models
+- `phase.py` compute phase calculations and plots
+- `plots.py` compute different kind of plots
+
+# lens models parameters
 
 **amps files** </br>
 *..._FP*    means for phase  and with the normalization factor phi_m </br>
