@@ -7,6 +7,14 @@ Contain Mathematica script to calculate amplification factor
 - `pyCBC_function.py` basic functions to calculate waveforms and lensing
 - `LISA.py` LISA sensitivities from [here](https://github.com/eXtremeGravityInstitute/LISA_Sensitivity/tree/1)
 
+### MSD
+Codes used in the paper [arXiv:210407055](https://arxiv.org/abs/2104.07055)
+
+- `MSD_2.py` general code to compute lensing 
+- `MSD_matrix_2.py` code to plot matrix of SNRs
+- `SNR_regimes.py` code to compute SNR calculation and plot
+- `SNR_regimes_2.py` edited version of *"SNR_regimes.py"*
+
 ### lens_models
 - `SIS_NFW.py`
 - `SNR.py` calculate SNR
