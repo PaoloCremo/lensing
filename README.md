@@ -1,6 +1,6 @@
 # files
 
-### folder with models name (SIS, NFW, NFW_2 & GNFW_2)
+### folder with models name (SIS, NFW, NFW-2 & GNFW_2)
 Contain Mathematica script to calculate amplification factor
 
 ### packages
