@@ -4,8 +4,8 @@
 Contain Mathematica script to calculate amplification factor
 
 ### packages
-- *pyCBC_function.py* basic functions to calculate waveforms and lensing
-- *LISA.py* LISA sensitivities from [here](https://github.com/eXtremeGravityInstitute/LISA_Sensitivity/tree/1)
+- `pyCBC_function.py` basic functions to calculate waveforms and lensing
+- `LISA.py` LISA sensitivities from [here](https://github.com/eXtremeGravityInstitute/LISA_Sensitivity/tree/1)
 
 # lens models
 
