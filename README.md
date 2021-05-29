@@ -15,6 +15,9 @@ Codes used in the paper [arXiv:210407055](https://arxiv.org/abs/2104.07055)
 - `SNR_regimes.py` code to compute SNR calculation and plot
 - `SNR_regimes_2.py` edited version of *"SNR_regimes.py"*
 
+### microlensing
+- `multi_lenses.py` code to compute lensing of sigle signal by multiple lenses
+
 ### lens_models
 - `SIS_NFW.py`
 - `SNR.py` calculate SNR
