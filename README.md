@@ -8,7 +8,7 @@ Contain Mathematica script to calculate amplification factor
 - `LISA.py` LISA sensitivities from [here](https://github.com/eXtremeGravityInstitute/LISA_Sensitivity/tree/1)
 
 ### MSD
-Codes used in the paper [arXiv:210407055](https://arxiv.org/abs/2104.07055)
+Codes used in the paper [arXiv:2104.07055](https://arxiv.org/abs/2104.07055)
 
 - `MSD_2.py` general code to compute lensing 
 - `MSD_matrix_2.py` code to plot matrix of SNRs
