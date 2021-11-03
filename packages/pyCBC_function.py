@@ -268,10 +268,6 @@ def AF_PM(f, M_lens, zL, y, lam=1):
     q = (1j*Ome*lam)/2
     p = 2**(-1-q)*np.exp(q*lam*y**2)*1/lam*(-2*q)**(1+q)
     g = gamma(-q)
-    # n = -1 + q
-    # xx = -1/2*1j*Ome*lam*y**2
-    # l = np.polynomial.laguerre.lagval(xx, np.eye(1, n+1, n)[0])
-    # l = lpn(n, xx)
     h = hyp1f1(-(-1+q), 1, -q*y**2, maxterms=10**6)
     h = complex(h.real, h.imag)
     
