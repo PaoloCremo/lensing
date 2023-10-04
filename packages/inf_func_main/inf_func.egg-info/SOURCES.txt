@@ -1,0 +1,12 @@
+setup.py
+inf_func/__init__.py
+inf_func/_version.py
+inf_func/functions.py
+inf_func/functions_opt2.py
+inf_func/lut.py
+inf_func/old_functions.py
+inf_func.egg-info/PKG-INFO
+inf_func.egg-info/SOURCES.txt
+inf_func.egg-info/dependency_links.txt
+inf_func.egg-info/requires.txt
+inf_func.egg-info/top_level.txt
