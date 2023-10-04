@@ -19,18 +19,18 @@ from mpmath import hyp1f1
 from scipy.special import gamma
 import matplotlib.pyplot as plt
 import scipy.integrate as integrate
-from scipy.signal import find_peaks
+# from scipy.signal import find_peaks
 from scipy.interpolate import interp1d
 from datetime import datetime, timedelta
-from astropy.cosmology import Planck18_arXiv_v2 as cosmo
+# from astropy.cosmology import Planck18_arXiv_v2 as cosmo
 
-from pycbc import frame
-from pycbc.types import real_same_precision_as
-from pycbc.filter import resample_to_delta_t, highpass, matched_filter, sigma
-from pycbc.types import TimeSeries, FrequencySeries, Array
+# from pycbc import frame
+# from pycbc.types import real_same_precision_as
+# from pycbc.filter import resample_to_delta_t, highpass, matched_filter, sigma
+# from pycbc.types import TimeSeries, FrequencySeries, Array
 from pycbc.waveform import get_td_waveform, get_fd_waveform, td_approximants
-from pycbc.psd import interpolate, inverse_spectrum_truncation
-from pycbc.waveform.utils import time_from_frequencyseries, phase_from_frequencyseries, phase_from_polarizations
+# from pycbc.psd import interpolate, inverse_spectrum_truncation
+# from pycbc.waveform.utils import time_from_frequencyseries, phase_from_frequencyseries, phase_from_polarizations
 
 # define constants
 H0 = 74.
@@ -129,7 +129,7 @@ def divide(a):
     ad = np.array(ad)
     return ad
 #%
-obs = pd.read_csv('/home/paolo/Dropbox/PhD/Python/wpd_datasets.csv')
+# obs = pd.read_csv('/home/paolo/Dropbox/PhD/Python/wpd_datasets.csv')
 
 def find_zeros(fun):
     l = len(fun)
