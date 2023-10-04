@@ -34,14 +34,13 @@ def AF_int_bilby_pipe(f, Ml_red, y, lam, matrix_n):
     elif matrix_n == 5:
         return interpn((lut.f_a5, lut.Mlr_a5, lut.y_a5, lut.lam_a5), lut.matrix5, (f, Ml_red, y, lam))
 
-
 def my_lal_binary_black_hole_bilby_pipe(frequency_array, mass_1, mass_2, luminosity_distance,
                              a_1, tilt_1, phi_12, a_2, tilt_2, phi_jl, theta_jn,
-                             phase, Ml_r, y, lam, **kwargs):
+                             phase, Ml_r, y, lam, matrix_n, **kwargs):
     '''
     function to create the waveform to feed the MCMC
     '''
-    waveform_kwargs = dict(waveform_approximant='IMRPhenomXP', reference_frequency=50.0,
+    waveform_kwargs = dict(waveform_approximant='IMRPhenomXPHM', reference_frequency=50.0,
                            minimum_frequency=20.0, maximum_frequency=frequency_array[-1],
                            catch_waveform_errors=False, pn_spin_order=-1, pn_tidal_order=-1,
                            pn_phase_order=-1, pn_amplitude_order=0)
@@ -57,40 +56,26 @@ def my_lal_binary_black_hole_bilby_pipe(frequency_array, mass_1, mass_2, luminos
     lf = np.where(frequency_array.round(0)==19)[0][-1]           # find index for f_min
     f_max = round(f_fin(20., mass_1, mass_2), 0)                 # find f_max
     uf = np.where(frequency_array.round(1)==f_max)[0][0]         # find index for f_max
-    AF = AF_int_bilby_pipe(frequency_array[lf:uf], Ml_r, y, lam, 4) # compute AF in [f_min:f_max] with the LUT
+    AF = AF_int_bilby_pipe(frequency_array[lf:uf], Ml_r, y, lam, matrix_n) # compute AF in [f_min:f_max] with the LUT
     AF = np.concatenate((np.zeros(lf), AF))                      # add zeros for f<f_min
     AF = np.concatenate((AF, np.zeros(len(frequency_array)-uf))) # add zeros for f>f_max
 
     return dict(plus=wf['plus']*np.conj(AF), cross=wf['cross']*np.conj(AF))
 
-def my_lal_binary_black_hole_bilby_pipe2(frequency_array, mass_1, mass_2, luminosity_distance,
+def my_lal_binary_black_hole_bilby_pipe_m4(frequency_array, mass_1, mass_2, luminosity_distance,
                              a_1, tilt_1, phi_12, a_2, tilt_2, phi_jl, theta_jn,
                              phase, Ml_r, y, lam, **kwargs):
-    '''
-    function to create the waveform to feed the MCMC
-    '''
-    waveform_kwargs = dict(waveform_approximant='IMRPhenomXP', reference_frequency=50.0,
-                           minimum_frequency=20.0, maximum_frequency=frequency_array[-1],
-                           catch_waveform_errors=False, pn_spin_order=-1, pn_tidal_order=-1,
-                           pn_phase_order=-1, pn_amplitude_order=0)
-    waveform_kwargs.update(kwargs)
-    wf = bilby.gw.source._base_lal_cbc_fd_waveform( frequency_array=frequency_array,
-                                                   mass_1=mass_1, mass_2=mass_2,
-                                                   luminosity_distance=luminosity_distance,
-                                                   theta_jn=theta_jn, phase=phase, a_1=a_1,
-                                                   a_2=a_2, tilt_1=tilt_1, tilt_2=tilt_2,
-                                                   phi_12=phi_12, phi_jl=phi_jl,
-                                                   **waveform_kwargs)
+    return my_lal_binary_black_hole_bilby_pipe(frequency_array, mass_1, mass_2, luminosity_distance,
+                             a_1, tilt_1, phi_12, a_2, tilt_2, phi_jl, theta_jn,
+                             phase, Ml_r, y, lam, matrix_n=4, **kwargs)
 
-    lf = np.where(frequency_array.round(0)==19)[0][-1]           # find index for f_min
-    f_max = round(f_fin(20., mass_1, mass_2), 0)                 # find f_max
-    uf = np.where(frequency_array.round(1)==f_max)[0][0]         # find index for f_max
-    AF = AF_int_bilby_pipe(frequency_array[lf:uf], Ml_r, y, lam, 5) # compute AF in [f_min:f_max] with the LUT
-    AF = np.concatenate((np.zeros(lf), AF))                      # add zeros for f<f_min
-    AF = np.concatenate((AF, np.zeros(len(frequency_array)-uf))) # add zeros for f>f_max
-
-    return dict(plus=wf['plus']*np.conj(AF), cross=wf['cross']*np.conj(AF))
-
+def my_lal_binary_black_hole_bilby_pipe_m5(frequency_array, mass_1, mass_2, luminosity_distance,
+                             a_1, tilt_1, phi_12, a_2, tilt_2, phi_jl, theta_jn,
+                             phase, Ml_r, y, lam, **kwargs):
+    return my_lal_binary_black_hole_bilby_pipe(frequency_array, mass_1, mass_2, luminosity_distance,
+                             a_1, tilt_1, phi_12, a_2, tilt_2, phi_jl, theta_jn,
+                             phase, Ml_r, y, lam, matrix_n=5, **kwargs)
+    
 
 
 def f_PhenomA(indx,m1,m2):
