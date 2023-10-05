@@ -86,3 +86,23 @@ lam_a5 = np.arange(0.5, 1.53, 0.03)       # MSD parameter
 
 matrix5 = np.fromfile(path_home+'/data/matrices/matrix5', dtype=complex)   # read LUT
 matrix5 = np.reshape(matrix5, (len(f_a5), len(Mlr_a5), len(y_a5), len(lam_a5)))  # reshape LUT to arrays
+
+# matrix 6
+
+# frequencies
+f1_6 = np.arange(0, 100, 1.5)
+f2_6 = np.arange(100, 289, 2.5)
+#masses
+m1_6 = np.arange(1, 500, 5)
+m2_6 = np.arange(500, 2000, 10)
+m3_6 = np.arange(2000, 10001, 50)
+
+# arrays
+f_a6   = np.concatenate((f1_6, f2_6))         # frequencies
+Mlr_a6 = np.concatenate((m1_6, m2_6, m3_6))     # observer lens mass
+y_a6   = np.arange(0.01, 3.05, 0.04)      # impact parameter
+lam_a6 = np.arange(0.01, 3.04, 0.03)       # MSD parameter
+'''
+matrix6 = np.fromfile(path_home+'/data/matrices/matrix6', dtype=complex)   # read LUT
+matrix6 = np.reshape(matrix5, (len(f_a6), len(Mlr_a6), len(y_a6), len(lam_a6)))  # reshape LUT to arrays
+'''

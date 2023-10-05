@@ -75,6 +75,13 @@ def my_lal_binary_black_hole_bilby_pipe_m5(frequency_array, mass_1, mass_2, lumi
     return my_lal_binary_black_hole_bilby_pipe(frequency_array, mass_1, mass_2, luminosity_distance,
                              a_1, tilt_1, phi_12, a_2, tilt_2, phi_jl, theta_jn,
                              phase, Ml_r, y, lam, matrix_n=5, **kwargs)
+
+def my_lal_binary_black_hole_bilby_pipe_m6(frequency_array, mass_1, mass_2, luminosity_distance,
+                             a_1, tilt_1, phi_12, a_2, tilt_2, phi_jl, theta_jn,
+                             phase, Ml_r, y, lam, **kwargs):
+    return my_lal_binary_black_hole_bilby_pipe(frequency_array, mass_1, mass_2, luminosity_distance,
+                             a_1, tilt_1, phi_12, a_2, tilt_2, phi_jl, theta_jn,
+                             phase, Ml_r, y, lam, matrix_n=6, **kwargs)
     
 
 
