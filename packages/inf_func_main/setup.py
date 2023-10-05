@@ -1,8 +1,6 @@
 # example:
 # https://github.com/PyFstat/PyFstat/blob/master/setup.py
 
-exec(open('inf_func/_version.py').read())
-
 import setuptools
 
 setuptools.setup(
@@ -18,3 +16,14 @@ setuptools.setup(
         # '...',
         ]
 )
+
+import re
+VERSIONFILE="inf_func/_version.py"
+verstrline = open(VERSIONFILE, "rt").read()
+VSRE = r"^__version__ = ['\"]([^'\"]*)['\"]"
+mo = re.search(VSRE, verstrline, re.M)
+if mo:
+    verstr = mo.group(1)
+else:
+    raise RuntimeError("Unable to find version string in %s." % (VERSIONFILE,))
+~                                                                               
