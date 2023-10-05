@@ -323,3 +323,9 @@ def make_table2(f_array, Ml_array, y_array, lam_array, file_path = path_home+'/m
     m.tofile(file_path)
 
     return None
+
+
+
+def main():
+    import lut
+    make_table2(lut.f_a6, lut.Mlr_a6, lut.y_a6, lut.lam_a6)
